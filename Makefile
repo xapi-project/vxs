@@ -20,4 +20,4 @@ install: all
 
 uninstall:
 	ocamlfind remove xsops
-	rm $(PREFIX)/bin/vxs_fe
+	rm $(PREFIX)/bin/vxs
