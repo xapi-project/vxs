@@ -23,13 +23,14 @@ type t = {
 }
 
 let put_blob host_config session_id blob value =
-  match Cohttp_lwt_body.body_of_string value with 
-  | Some v -> 
-    let uri = Printf.sprintf "http://%s/blob?session_id=%s&ref=%s" host_config.Host.host session_id blob.r in
-    Utils.http_put uri v
-  | None -> 
-    Lwt.return ()
-      
+  let body = Cohttp_lwt_body.of_string value in
+  let uri =
+    Printf.sprintf
+      "http://%s/blob?session_id=%s&ref=%s"
+      host_config.Host.host session_id blob.r
+  in
+  Utils.http_put uri body
+
 let add_blob rpc session_id vm name =
   lwt blob = X.VM.create_new_blob ~rpc ~session_id ~vm ~name ~mime_type:"" ~public:true in
   lwt uuid = X.Blob.get_uuid ~rpc ~session_id ~self:blob in
