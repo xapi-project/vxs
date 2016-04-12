@@ -328,19 +328,6 @@ let ssh copts vm =
    in
   Lwt_main.run (aux ())
 
-(*	let uri = Printf.sprintf "http://%s/" !host in
-        let rpc = make uri in
-        lwt session_id = Session.login_with_password rpc !username !password "1.0" in
-        try_lwt
-                lwt pools = Pool.get_all rpc session_id in
-                let pool = List.hd pools in
-				lwt blob = Pool.create_new_blob rpc session_id pool "test7" "text" true in
-                let body = match Body.body_of_string "testing" with | Some x -> x | None -> failwith "Error" in
-                lwt () = http_put (Printf.sprintf "%sblob?session_id=%s&ref=%s" uri session_id blob) body in
-                return ()
-        finally
-                Session.logout rpc session_id*)
-
 let help common_opts man_format cmds topic = match topic with
   | None -> `Help (`Pager, None) (* help about the program. *)
   | Some topic ->
