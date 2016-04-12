@@ -22,7 +22,7 @@ module X=Xen_api_lwt_unix
 
 let rec connect rpc host username password =
 	try_lwt
-		  lwt session = X.Session.login_with_password rpc username password "1.0" in
+		  lwt session = X.Session.login_with_password rpc username password "1.0" "vxs" in
       Printf.printf "Connected\n%!";
       return session
   with _ ->

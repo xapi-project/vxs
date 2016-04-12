@@ -227,7 +227,7 @@ type vxs_templates = vxs_template list with rpc
 let with_rpc_and_session host f =
     let uri = Printf.sprintf "http://%s/" host.host in
     let rpc = X.make uri in
-    lwt session_id = X.Session.login_with_password rpc host.username host.password "1.0" in
+    lwt session_id = X.Session.login_with_password rpc host.username host.password "1.0" "vxs" in
     Lwt.finalize (fun () -> f ~rpc ~session_id) (fun () -> X.Session.logout ~rpc ~session_id)    
 
 let wait rpc session_id classes pred =
